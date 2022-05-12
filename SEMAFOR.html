@@ -1,0 +1,130 @@
+<!DOCTYPE html> 
+ 
+<html lang="en"> 
+      
+  <head> 
+      <meta charset="UTF-8"> 
+      <style>  
+          #pozadina { 
+            background-color: rgba(0, 0, 0, 0.438); 
+            width: 150px; 
+            height: 530px;  
+            padding: 20px 50px 0 50px;
+            margin: 50px 0 0 300px; 
+            border-radius: 20px;
+          }
+          .sijalica { 
+              width: 150px; 
+              height: 150px;  
+              margin-bottom: 10px;
+              border-radius: 40%; 
+              border: 2px solid rgb(12, 12, 12);
+          }
+          .boja-zelena { 
+              background-color: rgb(114, 206, 72);  
+              box-shadow: 4px 4px 60px rgb(151, 247, 155);
+
+          } 
+          .boja-zuta { 
+              background-color: rgb(238, 235, 44);   
+              box-shadow: 4px 4px 60px rgb(248, 246, 139);
+              
+              
+          } 
+          .boja-crvena { 
+              background-color: rgb(221, 48, 25);  
+              box-shadow: 4px 4px 60px rgb(240, 72, 42);
+              
+          }
+    
+    </style>
+  </head> 
+  <body>  
+    <div id="pozadina">
+    <div id="semafor"></div> 
+    <button onclick="promeniBoju()">Start</button>
+     </div>
+  <script> 
+     function Semafor(id) { 
+        var idDom = id; 
+        var el = document.getElementById(idDom); 
+
+        var isOtvoren = true; 
+        var trenutnoMenjam = false;  
+
+        var Sijalica1 = document.createElement("div"); 
+        Sijalica1.className = "sijalica";  
+
+        var Sijalica2 = document.createElement("div"); 
+        Sijalica2.className = "sijalica"; 
+         
+        var Sijalica3 = document.createElement("div"); 
+         Sijalica3.className = "sijalica";
+
+        
+        el.appendChild(Sijalica3); 
+        el.appendChild(Sijalica2); 
+        el.appendChild(Sijalica1); 
+
+        function PostaviBoju() { 
+                trenutnoMenjam = true; 
+        if(isOtvoren) {  
+            Sijalica3.className = "sijalica boja-crvena"; 
+            setTimeout(function() { 
+                Sijalica1.className = "sijalica"; 
+                Sijalica2.className = "sijalica boja-zuta"; 
+
+            setTimeout(function() { 
+                Sijalica3.className = "sijalica"; 
+                Sijalica2.className = "sijalica"; 
+                Sijalica1.classList.add("boja-zelena");  
+
+                trenutnoMenjam = false;
+                }, 1000);
+
+            }, 1000);
+          }
+        
+        else{ 
+            Sijalica1.className = "sijalica boja-zelena"; 
+            setTimeout(function() { 
+                Sijalica3.className = "sijalica";  
+                Sijalica2.className = "sijalica boja-zuta";  
+                Sijalica1.className = "sijalica";  
+             
+            setTimeout(function() { 
+                Sijalica1.className = "sijalica"; 
+                Sijalica2.className = "sijalica"; 
+                Sijalica3.classList.add("boja-crvena"); 
+                 
+                trenutnoMenjam = false;
+                 }, 1000);
+
+            }, 1000);
+          }
+        } 
+        this.promeni = function() { 
+            if(trenutnoMenjam) {
+              return;
+            }  
+           isOtvoren = !isOtvoren; 
+           PostaviBoju();
+        }  
+           Sijalica1.classList.add("boja-zelena");  
+
+     }
+        
+       var s1 = new Semafor("semafor");
+          function promeniBoju() {
+              s1.promeni();
+          }
+       
+
+ 
+ </script>
+
+
+  </body>
+
+
+</html>
